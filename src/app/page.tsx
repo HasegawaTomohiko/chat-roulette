@@ -17,7 +17,7 @@ export default function Home() {
     socket.onmessage = (event) => {
       const data = JSON.parse(event.data);
       if (data.type === 'updateEventList') {
-        setEventList(data.content);
+        setEventList(data.eventList);
       } else if (data.type === 'rouletteResult') {
         setRouletteResult(data.content);
         alert(`Selected: ${data.content}`);
@@ -28,6 +28,7 @@ export default function Home() {
   }, []);
 
   const sendMessage = () => {
+    console.log("入力された");
     if (message.trim()) {
       socket.send(JSON.stringify({ type: 'newEventList', content: message }));
       setMessage('');
@@ -45,21 +46,16 @@ export default function Home() {
       </SHeader>
       <SMain>
         <SEventGrid className="candidate">
-          <SEvent>プール</SEvent>
-          <SEvent>花火大会</SEvent>
-          <SEvent>ディズニーランド</SEvent>
-          <SEvent>バーベキュー</SEvent>
-          <SEvent>海水浴</SEvent>
-          <SEvent>水上バイク</SEvent>
-          <SEvent>ボーリング</SEvent>
-          <SEvent>グランピング</SEvent>
+          {eventList.map((eventData) => (
+              <SEvent key={eventData}>{eventData}</SEvent>
+          ))}
         </SEventGrid>
         <SOperation>
           <SInputArea className="inputBox">
-            <SInput type="text" placeholder="イベントを入力してください" />
-            <SButton>送信</SButton>
+            <SInput value={message} onChange={(event) => setMessage(event.target.value)} type="text" placeholder="イベントを入力してください" />
+            <SButton onClick={sendMessage}>送信</SButton>
           </SInputArea>
-          <SRoulette>ルーレット</SRoulette>
+          <SRoulette onClick={handleRoulette}>ルーレット</SRoulette>
         </SOperation>
       </SMain>
       <SFooter>
@@ -103,6 +99,7 @@ const SEventGrid = styled.div`
   max-height: calc(100vh - 200px);
   padding: 40px;
   overflow: scroll;
+  &::-webkit-scrollbar{   display: none; }
 `;
 
 const SEvent = styled.div`

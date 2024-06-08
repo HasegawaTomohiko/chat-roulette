@@ -22,10 +22,14 @@ wss.on('connection', (ws) => {
       console.log(eventList);
     //ルーレットを回した時
     } else if (data.type === 'roulette') {
-      const randomList = eventList[Math.floor(Math.random() * eventList.length )];
+      let random = Math.floor(Math.random() * eventList.length );
+      const randomList = eventList[random];
+      const newEventList = eventList.filter((_, index) => index !== random);
+      eventList = newEventList;
       wss.clients.forEach((client) => {
         if (client.readyState === WebSocket.OPEN) {
-          client.send(JSON.stringify({ type: 'rouletteResult', content: randomList}))
+          client.send(JSON.stringify({ type: 'rouletteResult', content: randomList}));
+          client.send(JSON.stringify({ type: 'updateEventList', eventList }));
         }
       });
     }
