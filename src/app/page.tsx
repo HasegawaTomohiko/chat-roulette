@@ -1,8 +1,43 @@
 'use client';
 
 import styled from "styled-components";
+import { useEffect, useState } from 'react';
+
+let socket : WebSocket;
 
 export default function Home() {
+
+  const [message, setMessage] = useState('');
+  const [eventList, setEventList] = useState([]);
+  const [rouletteResult, setRouletteResult] = useState('');
+
+  useEffect(() => {
+    socket = new WebSocket('ws://localhost:8081');
+
+    socket.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      if (data.type === 'updateEventList') {
+        setEventList(data.content);
+      } else if (data.type === 'rouletteResult') {
+        setRouletteResult(data.content);
+        alert(`Selected: ${data.content}`);
+      }
+    };
+
+    return () => socket.close();
+  }, []);
+
+  const sendMessage = () => {
+    if (message.trim()) {
+      socket.send(JSON.stringify({ type: 'newEventList', content: message }));
+      setMessage('');
+    }
+  };
+
+  const handleRoulette = () => {
+    socket.send(JSON.stringify({ type: 'roulette' }));
+  };
+
   return (
     <>
       <SHeader>
