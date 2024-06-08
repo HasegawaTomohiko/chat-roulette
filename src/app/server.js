@@ -35,5 +35,5 @@ wss.on('connection', (ws) => {
     console.log('クライアントが抜けました');
   });
 });
-
+// test commit
 console.log('WebSocketサーバーが起動しました。 ws://localhost:8081');
