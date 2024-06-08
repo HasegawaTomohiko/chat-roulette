@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import styled from "styled-components";
 import { useEffect, useState } from 'react';
@@ -43,56 +43,98 @@ export default function Home() {
       <SHeader>
         <STitle>Chat-Roulette</STitle>
       </SHeader>
-      <SCandidate className="candidate">
-        <SEvent>焼肉</SEvent>
-      </SCandidate>
-      <SInputArea className="inputBox">
-        <SInput type="text" placeholder="イベントを入力してください" />
-        <SButton>送信</SButton>
-      </SInputArea>
+      <SMain>
+        <SEventGrid className="candidate">
+          <SEvent>プール</SEvent>
+          <SEvent>花火大会</SEvent>
+          <SEvent>ディズニーランド</SEvent>
+          <SEvent>バーベキュー</SEvent>
+          <SEvent>海水浴</SEvent>
+          <SEvent>水上バイク</SEvent>
+          <SEvent>ボーリング</SEvent>
+          <SEvent>グランピング</SEvent>
+        </SEventGrid>
+        <SOperation>
+          <SInputArea className="inputBox">
+            <SInput type="text" placeholder="イベントを入力してください" />
+            <SButton>送信</SButton>
+          </SInputArea>
+          <SRoulette>ルーレット</SRoulette>
+        </SOperation>
+      </SMain>
+      <SFooter>
+        <p>&copy; ChatRoulette. All rights reserved.</p>
+      </SFooter>
     </>
   );
-
 }
 
 const SHeader = styled.header`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #333;
   color: #fff;
-  padding: 8px;
   text-align: center;
+  height: 80px;
 `;
 
 const STitle = styled.h1`
   font-size: 1.6;
-  padding: 16px;
 `;
 
-const SCandidate = styled.div`
+const SMain = styled.main`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   width: 80%;
-  min-height: 550px;
   margin: 0 auto;
-  background-color: #f8f8f8;
+  min-height: calc(100vh - 130px);
+  background-color: #f0f0f0;
+`;
+
+const SEventGrid = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  width: 100%;
+  max-height: calc(100vh - 200px);
   padding: 40px;
+  overflow: scroll;
 `;
 
 const SEvent = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 24px;
-  background-color: #fff;
-  border-radius: 8px;
+  min-width: 240px;
+  min-height: 200px;
+  background-color: #aad4f9;
+  border-radius: 4px;
   text-align: center;
   font-size: 1.6rem;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 `;
 
-const SInputArea = styled.div`
-  position: relative;
-  width: 80%;
-  margin: 0 auto;
-  padding: 40px;
-  background-color: #f8f8f8;
+const SOperation = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: center;
+  position: relative;
+  width: calc(100% - 80px);
+  margin: 0 auto;
+  margin-bottom: 20px;
+`;
+
+const SInputArea = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: calc(100% - 80px);
+  margin: 0 auto;
 `;
 
 const SInput = styled.input`
@@ -106,7 +148,7 @@ const SInput = styled.input`
 
 const SButton = styled.button`
   position: absolute;
-  right: 46px;
+  right: 8px;
   padding: 10px 20px;
   border-radius: 8px;
   background-color: #333;
@@ -114,4 +156,29 @@ const SButton = styled.button`
   border: none;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+`;
+
+const SRoulette = styled.button`
+  width: 150px;
+  padding: 18px;
+  border-radius: 8px;
+  margin-left: 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+`;
+
+const SFooter = styled.footer`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  height: 50px;
+  bottom: 0;
 `;
