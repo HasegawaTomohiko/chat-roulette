@@ -1,95 +1,82 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+
+import styled from "styled-components";
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    <>
+      <SHeader>
+        <STitle>Chat-Roulette</STitle>
+      </SHeader>
+      <SCandidate className="candidate">
+        <SEvent>焼肉</SEvent>
+      </SCandidate>
+      <SInputArea className="inputBox">
+        <SInput type="text" placeholder="イベントを入力してください" />
+        <SButton>送信</SButton>
+      </SInputArea>
+    </>
   );
+
 }
+
+const SHeader = styled.header`
+  background-color: #333;
+  color: #fff;
+  padding: 8px;
+  text-align: center;
+`;
+
+const STitle = styled.h1`
+  font-size: 1.6;
+  padding: 16px;
+`;
+
+const SCandidate = styled.div`
+  width: 80%;
+  min-height: 550px;
+  margin: 0 auto;
+  background-color: #f8f8f8;
+  padding: 40px;
+`;
+
+const SEvent = styled.div`
+  padding: 24px;
+  background-color: #fff;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 1.6rem;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+`;
+
+const SInputArea = styled.div`
+  position: relative;
+  width: 80%;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: #f8f8f8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const SInput = styled.input`
+  width: 100%;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #fff;
+  border: none;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+`;
+
+const SButton = styled.button`
+  position: absolute;
+  right: 46px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+`;
